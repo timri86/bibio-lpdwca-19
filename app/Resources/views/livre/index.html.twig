@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Livres list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Auteur</th>
+                <th>Editeur</th>
+                <th>Disponibilite</th>
+                <th>Iban</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for livre in livres %}
+            <tr>
+                <td><a href="{{ path('livre_show', { 'id': livre.id }) }}">{{ livre.id }}</a></td>
+                <td>{{ livre.titre }}</td>
+                <td>{{ livre.description }}</td>
+                <td>{{ livre.auteur }}</td>
+                <td>{{ livre.editeur }}</td>
+                <td>{% if livre.disponibilite %}Yes{% else %}No{% endif %}</td>
+                <td>{{ livre.iban }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('livre_show', { 'id': livre.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('livre_edit', { 'id': livre.id }) }}">edit</a>
+                        </li>
+                        {% set emp= false %}
+                        <a href="{{ path('app_front_emprunt', { 'id': livre.id }) }}">
+                        {% for user in livre.users %}
+                            {% if user==app.user %}
+                                retourner
+                             {% set emp= true %}
+                            {% endif %}
+                        {% endfor %}
+                            {% if emp==false %}
+                            emprunter
+                            {% endif %}
+                                </a>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_GESTION') %}
+    <ul>
+        <li>
+            <a href="{{ path('livre_new') }}">Create a new livre</a>
+        </li>
+    </ul>
+    {% endif %}
+{% endblock %}

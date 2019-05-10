@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des Utilisateurs</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>prenom</th>
+            <th>Telephone</th>
+            <th>Adresse</th>
+            <th>Email</th>
+            <th>Etat</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom}}</td>
+                <td>{{ user.telephone }}</td>
+                <td>{{ user.adresse }}</td>
+                <td>{{ user.email }}</td>
+                <td>{% if user.enabled %}Actif{% else %}Désactivé{% endif %}</td>
+                <td><a href="{{ path('app_front_user_edit', { 'id': user.id }) }}">
+                        {% if user.enabled %}Désactiver{% else %}Activer{% endif %}</a> </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

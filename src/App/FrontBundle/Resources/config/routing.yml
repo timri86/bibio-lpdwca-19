@@ -1,0 +1,28 @@
+app_front_emprunt:
+    path:     /{id}/emprunt
+    defaults: { _controller: AppFrontBundle:Default:emprunt }
+
+app_front_users:
+    path:     /users
+    defaults: { _controller: AppFrontBundle:Default:users }
+
+app_front_user_edit:
+    path:     /{id}/user
+    defaults: { _controller: AppFrontBundle:Default:edituser }
+
+app_front_police:
+    path:     /my/police
+    defaults: { _controller: AppFrontBundle:Police:toto }
+
+
+app_front_livre:
+    resource: "@AppFrontBundle/Resources/config/routing/livre.yml"
+    prefix:   /livre
+
+app_front_category:
+    resource: "@AppFrontBundle/Resources/config/routing/category.yml"
+    prefix:   /category
+
+app_front_homepage:
+    path:     /
+    defaults: { _controller: AppFrontBundle:Default:index }

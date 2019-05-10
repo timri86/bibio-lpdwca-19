@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Livre</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ livre.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ livre.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ livre.description }}</td>
+            </tr>
+            <tr>
+                <th>Auteur</th>
+                <td>{{ livre.auteur }}</td>
+            </tr>
+            <tr>
+                <th>Editeur</th>
+                <td>{{ livre.editeur }}</td>
+            </tr>
+            <tr>
+                <th>Disponibilite</th>
+                <td>{% if livre.disponibilite %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Iban</th>
+                <td>{{ livre.iban }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('livre_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('livre_edit', { 'id': livre.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
