@@ -1,3 +1,8 @@
+livre_index_user:
+    path:     /mes-emprunts
+    defaults: { _controller: "AppFrontBundle:Livre:mesemprunt" }
+    methods:  GET
+
 livre_index:
     path:     /
     defaults: { _controller: "AppFrontBundle:Livre:index" }

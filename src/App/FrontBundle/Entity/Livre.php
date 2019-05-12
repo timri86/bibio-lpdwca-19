@@ -64,6 +64,13 @@ class Livre
     private $iban;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="nbre", type="integer", nullable=true)
+     */
+    private $nbre;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\FrontBundle\Entity\Category")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -292,5 +299,29 @@ class Livre
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set nbre
+     *
+     * @param integer $nbre
+     *
+     * @return Livre
+     */
+    public function setNbre($nbre)
+    {
+        $this->nbre = $nbre;
+
+        return $this;
+    }
+
+    /**
+     * Get nbre
+     *
+     * @return integer
+     */
+    public function getNbre()
+    {
+        return $this->nbre;
     }
 }

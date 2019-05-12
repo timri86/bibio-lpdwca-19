@@ -10,11 +10,6 @@ app_front_user_edit:
     path:     /{id}/user
     defaults: { _controller: AppFrontBundle:Default:edituser }
 
-app_front_police:
-    path:     /my/police
-    defaults: { _controller: AppFrontBundle:Police:toto }
-
-
 app_front_livre:
     resource: "@AppFrontBundle/Resources/config/routing/livre.yml"
     prefix:   /livre

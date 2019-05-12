@@ -5,6 +5,7 @@ namespace App\FrontBundle\Controller;
 use App\FrontBundle\Entity\Livre;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Livre controller.
@@ -16,6 +17,7 @@ class LivreController extends Controller
      * Lists all livre entities.
      *
      */
+
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
@@ -26,10 +28,20 @@ class LivreController extends Controller
             'livres' => $livres,
         ));
     }
+    public function mesempruntAction()
+    {
+        $user=$this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $livres = $em->getRepository('AppFrontBundle:Livre')->findAll();
+
+        return $this->render('livre/mesemprunts.html.twig', array(
+            'livres' => $livres,
+        ));
+    }
+
 
     /**
-     * Creates a new livre entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newAction(Request $request)
     {
@@ -43,7 +55,7 @@ class LivreController extends Controller
             $em->persist($livre);
             $em->flush();
 
-            return $this->redirectToRoute('livre_show', array('id' => $livre->getId()));
+            return $this->redirectToRoute('livre_index');
         }
 
         return $this->render('livre/new.html.twig', array(
@@ -67,8 +79,7 @@ class LivreController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing livre entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editAction(Request $request, Livre $livre)
     {
@@ -79,7 +90,7 @@ class LivreController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('livre_edit', array('id' => $livre->getId()));
+            return $this->redirectToRoute('livre_index');
         }
 
         return $this->render('livre/edit.html.twig', array(
@@ -90,8 +101,7 @@ class LivreController extends Controller
     }
 
     /**
-     * Deletes a livre entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, Livre $livre)
     {
