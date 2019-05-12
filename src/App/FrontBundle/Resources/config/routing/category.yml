@@ -14,7 +14,7 @@ category_new:
     methods:  [GET, POST]
 
 category_edit:
-    path:     /admin/{id}/edit
+    path:     /{id}/edit
     defaults: { _controller: "AppFrontBundle:Category:edit" }
     methods:  [GET, POST]
 

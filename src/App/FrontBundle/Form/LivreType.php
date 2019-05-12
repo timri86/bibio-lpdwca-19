@@ -13,7 +13,7 @@ class LivreType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('titre')->add('description')->add('auteur')->add('editeur')->add('iban')->add('category');
+        $builder->add('titre')->add('description')->add('auteur')->add('editeur')->add('iban')->add('category')->add('nbre');
     }/**
      * {@inheritdoc}
      */

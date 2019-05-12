@@ -54,7 +54,7 @@ class Livre
      *
      * @ORM\Column(name="disponibilite", type="boolean")
      */
-    private $disponibilite=1;
+    private $disponibilite;
 
     /**
      * @var string
@@ -62,6 +62,13 @@ class Livre
      * @ORM\Column(name="iban", type="string", length=255, nullable=true)
      */
     private $iban;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="nbre", type="integer", nullable=true)
+     */
+    private $nbre;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\FrontBundle\Entity\Category")
@@ -228,5 +235,69 @@ class Livre
     {
         return $this->iban;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Set category
+     *
+     * @param \App\FrontBundle\Entity\Category $category
+     *
+     * @return Livre
+     */
+    public function setCategory(\App\FrontBundle\Entity\Category $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \App\FrontBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Livre
+     */
+    public function addUser(\AppBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \AppBundle\Entity\User $user
+     */
+    public function removeUser(\AppBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+}

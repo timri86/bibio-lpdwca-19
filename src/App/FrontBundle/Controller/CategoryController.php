@@ -5,6 +5,7 @@ namespace App\FrontBundle\Controller;
 use App\FrontBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Category controller.
@@ -28,8 +29,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Creates a new category entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newAction(Request $request)
     {
@@ -66,9 +66,8 @@ class CategoryController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing category entity.
-     *
-     */
+    * @Security("has_role('ROLE_ADMIN')")
+    */
     public function editAction(Request $request, Category $category)
     {
         $deleteForm = $this->createDeleteForm($category);
@@ -89,8 +88,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Deletes a category entity.
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, Category $category)
     {
