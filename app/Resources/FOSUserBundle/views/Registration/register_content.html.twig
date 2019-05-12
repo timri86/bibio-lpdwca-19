@@ -1,8 +1,15 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
+<h2>BIBIOTHEQUE UNIVERSITAIRE</h2>
+<h2>Inscription</h2>
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
-    </div>
+    {{ form_widget(form.email, {'attr': {'class': 'ggg', 'placeholder':'Email'}}) }}
+    {{ form_widget(form.nom, {'attr': {'class': 'ggg', 'placeholder':'Nom'}}) }}
+    {{ form_widget(form.prenom, {'attr': {'class': 'ggg', 'placeholder':'Prenom'}}) }}
+    {{ form_widget(form.adresse, {'attr': {'class': 'ggg', 'placeholder':'Adresse'}}) }}
+    {{ form_widget(form.telephone, {'attr': {'class': 'ggg', 'placeholder':'telephone'}}) }}
+    {{ form_widget(form.username, {'attr': {'class': 'ggg', 'placeholder':'Identifiant'}}) }}
+    {{ form_widget(form.plainPassword.first, {'attr': {'class': 'ggg', 'placeholder':'Mot de passe'}}) }}
+    {{ form_widget(form.plainPassword.second, {'attr': {'class': 'ggg', 'placeholder':'Confirmation mot de passe'}}) }}
+<input type="submit" value="{{ 'registration.submit'|trans }}" />
+</div>
 {{ form_end(form) }}

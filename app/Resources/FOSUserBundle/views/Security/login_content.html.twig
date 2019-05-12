@@ -1,8 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
+<h2>BIBIOTHEQUE UNIVERSITAIRE</h2>
+<h2>Connexion</h2>
 
 <form action="{{ path("fos_user_security_check") }}" method="post">
     {% if csrf_token %}
@@ -13,6 +12,6 @@
     <span><input type="checkbox" id="remember_me" name="_remember_me" value="on" />Remember Me</span>
     <h6><a href="{{ path('fos_user_resetting_request') }}">Forgot Password?</a></h6>
     <div class="clearfix"></div>
-    <input type="submit" value="Sign In" name="login">
     <input type="submit" id="_submit" name="_submit" value="Se connecter" />
 </form>
+<p>Pas de compte ?<a href="{{ path('fos_user_registration_register') }}">Créer un compte</a></p>

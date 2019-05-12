@@ -1,18 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Livres list</h1>
-
-    <table>
+<div class="table-agile-info">
+    {% if is_granted('ROLE_ADMIN') == true %}
+        <a class="btn btn-success" href="{{ path('livre_new') }}"><i class="fa fa-plus-square"></i> Ajouter un livre</a><hr/>
+    {% endif %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            LISTE DES LIVRES
+        </div>
+        <div>
+            <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Titre</th>
-                <th>Description</th>
                 <th>Auteur</th>
-                <th>Editeur</th>
-                <th>Disponibilite</th>
-                <th>Iban</th>
+                <th>Disponible</th>
+                <th>nombre exemplaire</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -21,32 +35,29 @@
             <tr>
                 <td><a href="{{ path('livre_show', { 'id': livre.id }) }}">{{ livre.id }}</a></td>
                 <td>{{ livre.titre }}</td>
-                <td>{{ livre.description }}</td>
                 <td>{{ livre.auteur }}</td>
-                <td>{{ livre.editeur }}</td>
-                <td>{% if livre.disponibilite %}Yes{% else %}No{% endif %}</td>
-                <td>{{ livre.iban }}</td>
+                <td>{% if livre.disponibilite %}Oui{% else %}non{% endif %}</td>
+                <td>{{ livre.nbre }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('livre_show', { 'id': livre.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('livre_edit', { 'id': livre.id }) }}">edit</a>
-                        </li>
+
+
+                            <a class="btn btn-default" href="{{ path('livre_show', { 'id': livre.id }) }}">Afficher</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                            <a class="btn btn-success" href="{{ path('livre_edit', { 'id': livre.id }) }}">Modifier</a>
+                    {% endif %}
                         {% set emp= false %}
-                        <a href="{{ path('app_front_emprunt', { 'id': livre.id }) }}">
+                        <a class="btn btn-warning" href="{{ path('app_front_emprunt', { 'id': livre.id }) }}">
                         {% for user in livre.users %}
                             {% if user==app.user %}
-                                retourner
+                                Retourner
                              {% set emp= true %}
                             {% endif %}
                         {% endfor %}
                             {% if emp==false %}
-                            emprunter
+                            Emprunter
                             {% endif %}
                                 </a>
-                    </ul>
+
                 </td>
             </tr>
         {% endfor %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="table-agile-info">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Liste des livres Empruntés
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped b-t b-light">
+                    <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Retourner</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for livre in livres %}
+                        {% for user in livre.users %}
+                            {% if user==app.user %}
+                                <tr>
+                                    <td>{{ livre.titre }}</td>
+                                    <td>{{ livre.description }}</td>
+                                    <td>
+                                        <a class="btn btn-warning" href="{{ path('app_front_emprunt', { 'id': livre.id }) }}"> Retourner</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

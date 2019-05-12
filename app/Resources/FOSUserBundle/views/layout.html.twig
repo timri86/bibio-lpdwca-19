@@ -23,6 +23,7 @@
     </head>
     <body>
 
+
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
@@ -34,6 +35,7 @@
         {% endif %}
         <div class="w3layouts-main">
             <div class="log-w3">
+
                 {% block fos_user_content %}
                 {% endblock fos_user_content %}
             </div>

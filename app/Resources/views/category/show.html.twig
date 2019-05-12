@@ -1,9 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Category</h1>
-
-    <table>
+<div class="table-agile-info">
+    {% if is_granted('ROLE_ADMIN') == true %}
+        <a class="btn btn-success" href="{{ path('category_new') }}"><i class="fa fa-plus-square"></i> Ajouter une catégorie</a><hr/>
+    {% endif %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            LISTE DES CATEGORIES
+        </div>
+        <div>
+            <table class="table" ui-jq="footable" ui-options='{
+                "paging": {
+                  "enabled": true
+                },
+                "filtering": {
+                  "enabled": true
+                },
+                "sorting": {
+                  "enabled": true
+                }}'>
+                <thead>
         <tbody>
             <tr>
                 <th>Id</th>
@@ -19,18 +36,7 @@
             </tr>
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('category_edit', { 'id': category.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}

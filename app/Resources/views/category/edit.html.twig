@@ -1,21 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Category edit</h1>
-
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('category_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div class="form-w3layouts">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Modification des catégories
+                    </header>
+                    <div class="panel-body">
+                        {{ form_start(edit_form, {'class': 'form-horizontal bucket-form'}) }}
+                        <div class="row form-group">
+                            <label class="col-sm-3 control-label">Nom de la catégorie</label>
+                            <div class="col-sm-6">
+                                {{ form_widget(edit_form.nom, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label class="col-sm-3 control-label">Description</label>
+                            <div class="col-sm-6">
+                                {{ form_widget(edit_form.description, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+                        <input class="btn btn-success right" type="submit" value="Enregister" />
+                        {{ form_end(edit_form) }}
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
 {% endblock %}
